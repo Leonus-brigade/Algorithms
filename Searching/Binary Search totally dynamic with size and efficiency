@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+int  binary(int a[],int n,int key)
+{
+   int b,t,te;//namely bottom top and temp
+
+   b=0;t=n-1;
+
+   while(t>=b)
+      {
+	te=(b+t)/2;
+            if(a[te]==key)
+	           return te; //return loc if no is present
+	else if(a[te]>key)
+	          t=te-1;  // since temp is greater than key we make temp the top extreme
+	else
+	        b=te+1;  // since temp is lesser than key we make temp the bottom extreme
+     }//end of while
+
+     return -1;//return -1  if no is not present
+}//end of function
+
+int main() //main function start
+{  int n,f,l,i,t; //no of elements in the array, element to be found,location, iterator, no of testcases
+char o; //ascending or descending
+
+cout<<"Enter Total Number of elements in the array : ";
+    cin>>n;//input size of array
+    int a[n];
+    cout<<"\nEnter A for Ascending and D for Descending : ";
+    cin>>o;//input order
+    while(o!= 'A' && o!='D')
+    {
+      cout<<"invalid entry!\nEnter A for Ascending and D for Descending : ";
+      cin>>o;//check validity and get correct input if necessary
+    }
+
+    /* Input elements in the array */
+    cout<<"Enter elements : ";//getting array elements
+    for(i=0; i<n; i++)
+       {
+        if(o=='A')
+        cin>>a[i];
+        else
+        cin>>a[n-(i+1)];
+       }
+
+cout<<"\n Enter number of test cases : ";
+cin>>t;//testcases
+for(int j=0;j<t;j++)
+   {
+   	cout<<"\n Enter number to be found : ";//element to be found
+  	cin>>f;
+  	
+
+  l=binary(a,n,f);//func invoked
+	if(l==-1)
+     	cout<<"\n Number not found ";//finding the flag negative and reporting
+    else//reporting position with the order in the consideration
+  	{
+	  	if(o=='A')
+    		cout<<"\n Number present at "<<l+1;
+   		else
+     		cout<<"\n Number present at "<<n-(l);
+  }
+}
+}
